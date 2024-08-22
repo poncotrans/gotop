@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIP Reseller API JSON Output</title>
+</head>
+<body>
+
+    <h1>Data Layanan Game (JSON)</h1>
+    <pre id="jsonOutput"></pre> <!-- Tempat menampilkan JSON -->
+
+    <script>
+        async function fetchGameData() {
+            try {
+                const response = await fetch('http://localhost:3000/proxy', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                const data = await response.json();
+
+                // Menampilkan data JSON dalam format terstruktur
+                document.getElementById('jsonOutput').textContent = JSON.stringify(data, null, 4);
+            } catch (error) {
+                console.error('Terjadi kesalahan dalam fetch: ', error);
+                document.getElementById('jsonOutput').textContent = 'Error: ' + error.message;
+            }
+        }
+
+        // Panggil fungsi untuk fetch data saat halaman dimuat
+        fetchGameData();
+    </script>
+
+</body>
+</html>
